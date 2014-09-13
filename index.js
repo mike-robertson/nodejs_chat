@@ -49,6 +49,7 @@ io.on('connect', function(socket){
 		});
 	});
 
+	// Whenever a user joins and has picked a name, they fire this which adds their name to the users window.
 	socket.on('userJoin', function(user) {
     	var escapedUser = user.replace('<', '').replace('>', '');
 		users.save({'user': escapedUser});
@@ -56,6 +57,7 @@ io.on('connect', function(socket){
 		socket.userName = escapedUser;
 	});
 
+	// This broadcasts chats from users and saves the message to the db.
 	socket.on('chat', function(user, msg){
     	// I'm too lazy to try to stop html injection more thoroughly.
     	var escapedUser = user.replace('<', '').replace('>', '');
@@ -65,6 +67,8 @@ io.on('connect', function(socket){
 		chatLogs.save({'user': escapedUser, 'message': escapedMsg});
 	});
 
+	// When a user disconnects, this will remove 1 instance of that user name from the list, and it will tell
+	// other clients to remove 1 instance of the user name from ther user window.
 	socket.on('disconnect', function() {
 		socket.broadcast.emit('userDisconnect', socket.userName);
 		users.remove({'user': socket.userName}, {justOne: true}, function(err, doc) {
