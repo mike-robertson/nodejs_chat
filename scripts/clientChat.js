@@ -29,7 +29,7 @@ socket.on('userJoin', function(newUser){
   });
 
 socket.on('chat', function(user, msg){
-	inputChat(user, msg);
+	inputChat(user, msg, false);
   });
 
 socket.on('userDisconnect', function(discUser) {

@@ -20,19 +20,22 @@ var sendMessage = function() {
 	if(messageText)
 	{
 		socket.emit('chat', userName, messageText);
-		inputChat(userName, messageText);
+		inputChat(userName, messageText, true);
     	$('#messageText').val('');
 	}
 };
 
 // Whenever we get a new message, we insert it into our chatWindow list.
-var inputChat = function(user, msg) {
-    $('.chatWindow ul').append('<li class=\'chatText wordwrap\'><span class=\'chatTestUser\'>' + user + '</span>: ' + msg + '</li>');
+var inputChat = function(user, msg, thisClient) {
+	if(thisClient)
+		$('.chatWindow ul').append('<li class=\'chatText wordwrap\'><span class=\'chatTestUser You\'>' + user + ' (you)</span>: ' + msg + '</li>');
+    else
+    	$('.chatWindow ul').append('<li class=\'chatText wordwrap\'><span class=\'chatTestUser\'>' + user + '</span>: ' + msg + '</li>');
 	$('.chatWindow').scrollTop($('.chatWindow').prop('scrollHeight'));
 };
 
-// Whenever a user leaves, we call this function. It removes 1 instance of that user from the users window.
+// Whenever a user leaves, we call this function. It removes 1 instance of that user from the users window that isn't us.
 var userLeft = function(discUser) {
 	$('.chatWindow ul').append('<li class=\'chatText wordwrap serverMessage\'>' + discUser + ' has left.</li>');
-	$('.chatUsers ul li').filter(function() { return $.text([this]) === discUser;})[0].remove();
+	$('.chatUsers ul li').not('.You').filter(function() { return $.text([this]) === discUser;})[0].remove();
 };
