@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		
+		<!-- Custom css for this page. -->
+		<link rel='stylesheet' href='/css/chatStyles.css'>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+		<!-- AngularJS source. -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.1/angular.min.js"></script>
+
+		<!-- The javascript library and custom functions which handle the server-client interaction. -->
+		<script src="/socket.io/socket.io.js"></script>
+		<script src='/scripts/functions.js'></script>
+
+	</head>
+
+	<body>
+		<div class='container'>
+			<h1>Chat App</h1>
+			<div class='chatBody'>
+				<div class='chatUsers'>
+					<ul></ul>
+				</div>
+				<div class='chatWindow'>
+					<ul></ul>
+				</div>
+			</div>
+			<input id="messageText" autocomplete="off">
+		</div>
+	</body>
+
+		<!-- Load the clientChat.js after the body so it can alter some events of DOM elements -->
+		<script src='/scripts/clientChat.js'></script>
+</html>
