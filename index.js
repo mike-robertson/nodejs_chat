@@ -6,9 +6,10 @@ var mongojs = require('mongojs');
 
 
 // Connection info and setup
-var dbUser = 'testUser';
-var dbPassword = 'testpass';
-var uri = 'mongodb://' + dbUser + ':' + dbPassword + '@ds035240.mongolab.com:35240/node_chat';
+var dbUser = 'user';
+var dbPassword = 'pass';
+// Put your uri here. I recommend mongolab for free online storage.
+var uri = '';
 var db = mongojs.connect(uri);
 var chatLogs = db.collection('chatLogs');
 var users = db.collection('users');
